@@ -8,4 +8,7 @@
     <string name="create_profile">create your profile</string>
     <string name="have_account">"Already have an account? "</string>
     <string name="log_in">Log in</string>
+    <string name="login_text">Welcome back!</string>
+    <string name="forget_password_text">Forgot your password?</string>
+    <string name="donot_have_account">Don’t have an account?</string>
 </resources>
