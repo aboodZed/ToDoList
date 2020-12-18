@@ -4,25 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity {
 
-    EditText etSearch;
+    TextView tvListName;
+    TextView tvListDelete;
     LinearLayout etCreate;
-    RecyclerView rvLists;
+    RecyclerView rvTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
         bindViews();
     }
 
     private void bindViews() {
-        etSearch = findViewById(R.id.et_search);
+        tvListName = findViewById(R.id.tv_list_name);
+        tvListDelete = findViewById(R.id.tv_list_delete);
         etCreate = findViewById(R.id.et_create);
-        rvLists = findViewById(R.id.rv_lists);
+        rvTasks = findViewById(R.id.rv_tasks);
     }
 }

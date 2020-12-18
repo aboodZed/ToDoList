@@ -10,4 +10,6 @@
     <color name="gray">#20FFFFFF</color>
     <color name="yellow">#FFBE0B</color>
     <color name="orange">#FB5607</color>
+    <color name="blue">#88CEFF</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
