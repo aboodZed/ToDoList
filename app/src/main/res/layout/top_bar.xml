@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     android:paddingStart="@dimen/margin_meduim"
     android:paddingTop="@dimen/margin_meduim"
-    android:paddingEnd="@dimen/margin_meduim"
-    android:paddingBottom="@dimen/margin_small">
+    android:paddingEnd="@dimen/margin_meduim">
 
     <ImageView
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_small"
         android:src="@drawable/ic_back" />
 
     <TextView
