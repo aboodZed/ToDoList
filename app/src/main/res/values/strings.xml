@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ToDoList</string>
     <string name="logo_text">Things ToDo</string>
+    <string name="next"><u>Next</u></string>
     <string name="sign_up_text">Create profile to start yor first ToDoList</string>
     <string name="your_name">Your name</string>
     <string name="password">Password</string>
@@ -12,7 +13,7 @@
     <string name="forget_password_text">Forgot your password?</string>
     <string name="donot_have_account">Don’t have an account?</string>
     <string name="list_to_Do">List toDo</string>
-    <string name="log_out">Logout</string>
+    <string name="log_out"><u>Logout</u></string>
     <string name="search">Search</string>
     <string name="list">List :</string>
     <string name="create_list">Create new list here</string>
@@ -20,4 +21,6 @@
     <string name="create_task">Create new task here</string>
     <string name="edit">Edit</string>
     <string name="description">Description</string>
+    <string name="result">Result :</string>
+    <string name="required_field">Required field</string>
 </resources>

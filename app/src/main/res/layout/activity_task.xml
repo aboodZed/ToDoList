@@ -35,7 +35,6 @@
             android:layout_marginStart="@dimen/margin_small"
             android:background="@drawable/type_task"
             android:padding="@dimen/margin_little"
-            android:text="meet"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/tv_task_name"
             app:layout_constraintTop_toTopOf="parent" />

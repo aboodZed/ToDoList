@@ -1,22 +1,28 @@
 package com.abdallah.todolist;
 
-class ToDoList {
+import java.io.Serializable;
+import java.util.ArrayList;
 
-    private int id;
+class ToDoList implements Serializable {
+
+    private String id;
     private String name;
-    private int tasks;
+    private ArrayList<ToDoTask> toDoTasks;
 
-    public ToDoList(int id, String name, int tasks) {
-        this.id = id;
-        this.name = name;
-        this.tasks = tasks;
+    public ToDoList() {
     }
 
-    public int getId() {
+    public ToDoList(String id, String name) {
+        this.id = id;
+        this.name = name;
+        toDoTasks = new ArrayList<>();
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -28,19 +34,20 @@ class ToDoList {
         this.name = name;
     }
 
-    public int getTasks() {
-        return tasks;
+    public ArrayList<ToDoTask> getToDoTasks() {
+        return toDoTasks;
     }
 
-    public void setTasks(int tasks) {
-        this.tasks = tasks;
+    public void setToDoTasks(ArrayList<ToDoTask> toDoTasks) {
+        this.toDoTasks = toDoTasks;
     }
 
     @Override
     public String toString() {
         return "ToDoList{" +
-                "name='" + name + '\'' +
-                ", tasks=" + tasks +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", toDoTasks=" + toDoTasks +
                 '}';
     }
 }

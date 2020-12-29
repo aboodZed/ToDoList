@@ -10,6 +10,9 @@ class ToDoTask implements Serializable {
     private long date;
     private String details;
 
+    public ToDoTask() {
+    }
+
     public ToDoTask(int id, String name, String type, long date, String details) {
         this.id = id;
         this.name = name;

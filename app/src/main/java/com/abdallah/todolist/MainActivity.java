@@ -1,49 +1,141 @@
 package com.abdallah.todolist;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
+public class MainActivity extends AppCompatActivity implements TextWatcher {
 
-public class MainActivity extends AppCompatActivity {
+    private ImageView ivBack;
+    private TextView tvLogout;
+    private EditText etSearch;
+    private LinearLayout etCreate;
+    private RecyclerView rvLists;
 
-    ImageView ivBack;
-    EditText etSearch;
-    LinearLayout etCreate;
-    RecyclerView rvLists;
+    private ListsAdapter listsAdapter;
+
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        myRef = FirebaseDatabase.getInstance().getReference()
+                .child(AppConstants.TABLE_TODOLIST_NAME)
+                .child(new SharedPreference(this).getUserId());
         bindViews();
     }
 
     private void bindViews() {
-        ivBack =  findViewById(R.id.iv_back);
+        ivBack = findViewById(R.id.iv_back);
+        tvLogout = findViewById(R.id.tv_logout);
         etSearch = findViewById(R.id.et_search);
         etCreate = findViewById(R.id.et_create);
         rvLists = findViewById(R.id.rv_lists);
 
         ivBack.setOnClickListener(view -> onBackPressed());
+        tvLogout.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        });
+        etCreate.setOnClickListener(view -> addList());
 
-        ArrayList<ToDoList> toDoLists = new ArrayList<>();
-        toDoLists.add(new ToDoList(1, "Home", 2));
-        toDoLists.add(new ToDoList(2, "Personal", 1));
-        toDoLists.add(new ToDoList(3, "Work", 3));
-        toDoLists.add(new ToDoList(4, "toDay", 2));
+        etSearch.addTextChangedListener(this);
 
-        ListsAdapter listsAdapter = new ListsAdapter(toDoLists, this);
+        listsAdapter = new ListsAdapter(this);
         rvLists.setLayoutManager(new LinearLayoutManager(this));
         rvLists.setItemAnimator(new DefaultItemAnimator());
         rvLists.setAdapter(listsAdapter);
+        addFireBaseListener();
+    }
+
+    public void addList() {
+        final EditText editText = new EditText(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Add a new List")
+                .setMessage("What do you want to name it?")
+                .setView(editText)
+                .setPositiveButton("Create", (dialog1, which) -> {
+
+                    String listName = editText.getText().toString().trim();
+
+                    if (TextUtils.isEmpty(listName)) {
+                        editText.setError(getString(R.string.required_field));
+                    } else {
+                        String id = myRef.push().getKey();
+                        ToDoList toDoList = new ToDoList(id, listName);
+                        myRef.child(id).setValue(toDoList);
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.show();
+    }
+
+
+    private void addFireBaseListener() {
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                listsAdapter.addItem(snapshot.getValue(ToDoList.class));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        listsAdapter.search(charSequence.toString());
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 }

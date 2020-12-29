@@ -28,4 +28,16 @@
         android:textColor="@color/white"
         android:textSize="@dimen/margin_large"/>
 
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/margin_meduim"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

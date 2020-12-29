@@ -16,11 +16,13 @@ import java.util.ArrayList;
 class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListHolder> {
 
     private ArrayList<ToDoList> toDoLists;
+    private ArrayList<ToDoList> all;
     private Activity activity;
 
-    public ListsAdapter(ArrayList<ToDoList> toDoLists, Activity activity) {
-        this.toDoLists = toDoLists;
+    public ListsAdapter(Activity activity) {
         this.activity = activity;
+        toDoLists = new ArrayList<>();
+        all = new ArrayList<>();
     }
 
     @NonNull
@@ -38,6 +40,28 @@ class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListHolder> {
     @Override
     public int getItemCount() {
         return toDoLists.size();
+    }
+
+    public void addItem(ToDoList toDoList) {
+        toDoLists.add(toDoList);
+        all.add(toDoList);
+        notifyItemInserted(toDoLists.size() - 1);
+    }
+
+    public void addAll() {
+        toDoLists = all;
+        notifyDataSetChanged();
+    }
+
+    public void search(String s) {
+        toDoLists.clear();
+        notifyDataSetChanged();
+        for (ToDoList toDoList : all) {
+            if (toDoList.getName().contains(s)) {
+                toDoLists.add(toDoList);
+                notifyItemInserted(toDoLists.size() - 1);
+            }
+        }
     }
 
     class ListHolder extends RecyclerView.ViewHolder {
@@ -62,11 +86,12 @@ class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListHolder> {
         public void setData(ToDoList toDoList) {
             this.toDoList = toDoList;
             tvListName.setText(toDoList.getName());
-            tvTasksNumber.setText(toDoList.getTasks() + " tasks");
+            if (toDoList.getToDoTasks() != null)
+                tvTasksNumber.setText(toDoList.getToDoTasks().size() + " tasks");
 
             clBackground.setOnClickListener(view -> {
                 Intent intent = new Intent(activity, ListActivity.class);
-                intent.putExtra("list_id", toDoList.getId());
+                intent.putExtra(AppConstants.LIST_EXTRA, toDoList);
                 activity.startActivity(intent);
             });
         }
