@@ -1,14 +1,15 @@
-package com.abdallah.todolist;
+package com.abdallah.todolist.models;
 
 import java.io.Serializable;
 
-class ToDoTask implements Serializable {
+public class ToDoTask implements Serializable {
 
     private int id;
     private String name;
     private String type;
     private long date;
     private String details;
+    private boolean finish;
 
     public ToDoTask() {
     }
@@ -61,6 +62,14 @@ class ToDoTask implements Serializable {
         this.details = details;
     }
 
+    public boolean isFinish() {
+        return finish;
+    }
+
+    public void setFinish(boolean finish) {
+        this.finish = finish;
+    }
+
     @Override
     public String toString() {
         return "ToDoTask{" +
@@ -69,6 +78,7 @@ class ToDoTask implements Serializable {
                 ", type='" + type + '\'' +
                 ", date=" + date +
                 ", details='" + details + '\'' +
+                ", finish=" + finish +
                 '}';
     }
 }

@@ -1,9 +1,10 @@
-package com.abdallah.todolist;
+package com.abdallah.todolist.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-class ToDoList implements Serializable {
+public class ToDoList implements Serializable {
 
     private String id;
     private String name;
@@ -35,6 +36,8 @@ class ToDoList implements Serializable {
     }
 
     public ArrayList<ToDoTask> getToDoTasks() {
+        if (toDoTasks == null)
+            toDoTasks = new ArrayList<>();
         return toDoTasks;
     }
 

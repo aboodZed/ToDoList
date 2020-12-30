@@ -1,4 +1,4 @@
-package com.abdallah.todolist;
+package com.abdallah.todolist.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.abdallah.todolist.R;
+import com.abdallah.todolist.main.MainActivity;
+import com.abdallah.todolist.utils.SharedPreference;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {

@@ -1,11 +1,10 @@
-package com.abdallah.todolist;
+package com.abdallah.todolist.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,11 +18,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.abdallah.todolist.auth.LoginActivity;
+import com.abdallah.todolist.R;
+import com.abdallah.todolist.models.ToDoList;
+import com.abdallah.todolist.utils.FirebaseReferences;
+import com.abdallah.todolist.utils.SharedPreference;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements TextWatcher {
 
@@ -41,9 +44,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myRef = FirebaseDatabase.getInstance().getReference()
-                .child(AppConstants.TABLE_TODOLIST_NAME)
-                .child(new SharedPreference(this).getUserId());
+        myRef = FirebaseReferences.getUserListsReference(this);
         bindViews();
     }
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
 
         ivBack.setOnClickListener(view -> onBackPressed());
         tvLogout.setOnClickListener(view -> {
+            new SharedPreference(this).clear();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -63,12 +65,15 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         etCreate.setOnClickListener(view -> addList());
 
         etSearch.addTextChangedListener(this);
+        recycle();
+        addFireBaseListener();
+    }
 
+    private void recycle() {
         listsAdapter = new ListsAdapter(this);
         rvLists.setLayoutManager(new LinearLayoutManager(this));
         rvLists.setItemAnimator(new DefaultItemAnimator());
         rvLists.setAdapter(listsAdapter);
-        addFireBaseListener();
     }
 
     public void addList() {
@@ -104,12 +109,12 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                listsAdapter.updateItem(snapshot.getValue(ToDoList.class));
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                listsAdapter.deleteItem(snapshot.getValue(ToDoList.class));
             }
 
             @Override

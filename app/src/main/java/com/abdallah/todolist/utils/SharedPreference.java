@@ -1,9 +1,9 @@
-package com.abdallah.todolist;
+package com.abdallah.todolist.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-class SharedPreference {
+public class SharedPreference {
 
     public final static String KEY_USER_ID = "user_id";
 
@@ -12,10 +12,7 @@ class SharedPreference {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
-    private Context context;
-
     public SharedPreference(Context context) {
-        this.context = context;
         pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
@@ -27,6 +24,11 @@ class SharedPreference {
 
     public String getUserId() {
         return pref.getString(KEY_USER_ID, "");
+    }
+
+    public void clear(){
+        editor.clear();
+        editor.apply();
     }
 
 }

@@ -23,4 +23,14 @@
     <string name="description">Description</string>
     <string name="result">Result :</string>
     <string name="required_field">Required field</string>
+    <string name="name">Name</string>
+    <string name="type">Type</string>
+    <string name="cancel">Cancel</string>
+    <string name="create">Create</string>
+    <string name="delete_list">Are you sure you want to delete this list?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save">Save</string>
+    <string name="wrong">Something wrong</string>
+    <string name="delete_Task">Are you sure you want to delete this task?</string>
 </resources>

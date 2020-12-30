@@ -9,19 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList">
-        <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".TaskActivity" />
-        <activity android:name=".ListActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".task.TaskActivity" />
+        <activity android:name=".list.ListActivity" />
+        <activity android:name=".auth.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".auth.LoginActivity" />
+        <activity android:name=".main.MainActivity" />
+        <activity android:name=".auth.RegisterActivity" />
     </application>
 
 </manifest>

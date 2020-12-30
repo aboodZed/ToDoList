@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
+    tools:context=".auth.SplashActivity"
     android:background="@drawable/gradient_background">
 
     <ImageView
@@ -34,8 +34,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_meduim"
+        android:layout_marginBottom="@dimen/margin_meduim"
+        android:padding="@dimen/margin_meduim"
         android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="@dimen/margin_meduim"/>
