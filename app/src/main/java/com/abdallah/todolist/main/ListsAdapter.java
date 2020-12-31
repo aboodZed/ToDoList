@@ -2,7 +2,6 @@ package com.abdallah.todolist.main;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.abdallah.todolist.utils.AppConstants;
-import com.abdallah.todolist.list.ListActivity;
 import com.abdallah.todolist.R;
+import com.abdallah.todolist.list.ListActivity;
 import com.abdallah.todolist.models.ToDoList;
+import com.abdallah.todolist.utils.AppConstants;
 
 import java.util.ArrayList;
 

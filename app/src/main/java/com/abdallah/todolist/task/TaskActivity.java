@@ -1,18 +1,15 @@
 package com.abdallah.todolist.task;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,8 +18,6 @@ import com.abdallah.todolist.models.ToDoList;
 import com.abdallah.todolist.models.ToDoTask;
 import com.abdallah.todolist.utils.AppConstants;
 import com.abdallah.todolist.utils.FirebaseReferences;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 import java.util.Calendar;
 import java.util.Locale;

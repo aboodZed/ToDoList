@@ -18,7 +18,6 @@ import com.abdallah.todolist.R;
 import com.abdallah.todolist.models.ToDoList;
 import com.abdallah.todolist.models.ToDoTask;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class TaskDialog extends DialogFragment {
@@ -42,7 +41,7 @@ public class TaskDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_change_password, container, false);
+        View view = inflater.inflate(R.layout.dialog_create_task, container, false);
         toDoList = (ToDoList) getArguments().getSerializable(AppConstants.LIST_EXTRA);
         bindViews(view);
         return view;

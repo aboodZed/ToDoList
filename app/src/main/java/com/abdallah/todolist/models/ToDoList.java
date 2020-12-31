@@ -2,7 +2,6 @@ package com.abdallah.todolist.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ToDoList implements Serializable {
 

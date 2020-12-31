@@ -3,11 +3,10 @@ package com.abdallah.todolist.list;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.util.Log;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.abdallah.todolist.R;
 import com.abdallah.todolist.models.ToDoList;
-import com.abdallah.todolist.task.TaskActivity;
 import com.abdallah.todolist.models.ToDoTask;
+import com.abdallah.todolist.task.TaskActivity;
 import com.abdallah.todolist.utils.AppConstants;
 import com.abdallah.todolist.utils.FirebaseReferences;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -154,9 +151,15 @@ class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> {
         private void check(boolean b) {
             if (b) {
                 cbFinished.setChecked(false);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    tvTaskName.setTextColor(activity.getColor(R.color.black));
+                }
                 tvTaskName.setPaintFlags(tvTaskName.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
             } else {
                 cbFinished.setChecked(true);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    tvTaskName.setTextColor(activity.getColor(R.color.dark_gray));
+                }
                 tvTaskName.setPaintFlags(tvTaskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
         }
